@@ -89,6 +89,13 @@ class BlockHandler
     private function validate($rules, $blockData)
     {
         /**
+         * Do check skip validation parameter, skipped if true
+         */
+        if (isset($rules['skip_validation']) && $rules['skip_validation'] === true) {
+            return true;
+        }
+
+        /**
          * Make sure that every required param exists in data block
          */
         foreach ($rules as $key => $value) {
@@ -146,13 +153,6 @@ class BlockHandler
             }
 
             /**
-             * Do check skip validation parameter, skipped if true
-             */
-            if (isset($rule['skip_validation']) && $rule['skip_validation'] === true) {
-                continue;
-            }
-
-            /**
              * Validate element types
              */
             switch ($elementType) {
@@ -200,6 +200,13 @@ class BlockHandler
      */
     private function sanitize($rules, $blockData)
     {
+        /**
+         * Do check skip sanitize parameter, skipped if true
+         */
+        if (isset($rules['skip_sanitize']) && $rules['skip_sanitize'] === true) {
+            return $blockData;
+        }
+
         /**
          * Sanitize every key in data block
          */

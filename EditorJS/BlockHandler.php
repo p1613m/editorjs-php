@@ -146,6 +146,13 @@ class BlockHandler
             }
 
             /**
+             * Do check skip validation parameter, skipped if true
+             */
+            if (isset($rule['skip_validation']) && $rule['skip_validation'] === true) {
+                continue;
+            }
+
+            /**
              * Validate element types
              */
             switch ($elementType) {
